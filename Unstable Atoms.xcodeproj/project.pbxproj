@@ -258,11 +258,6 @@
 			attributes = {
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Educanet;
-				TargetAttributes = {
-					92AF7764A496667EBCE9C5A9 = {
-						DevelopmentTeam = BXZCQ7UNDX;
-					};
-				};
 			};
 			buildConfigurationList = 92AF77214FAA753391C568AF /* Build configuration list for PBXProject "Unstable Atoms" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -410,7 +405,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BXZCQ7UNDX;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Unstable Atoms/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Educanet.Unstable-Atoms";
@@ -566,7 +561,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BXZCQ7UNDX;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Unstable Atoms/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Educanet.Unstable-Atoms";
