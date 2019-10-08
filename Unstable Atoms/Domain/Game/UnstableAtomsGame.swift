@@ -29,9 +29,11 @@ class UnstableAtomsGame: UnstableAtoms {
     // TODO: Implement
     func makeMove(coordinate: Coordinate) {
         addAtoms(x: coordinate.x, y: coordinate.y)
+        print("-----")
     }
     
     func addAtoms(x: Int, y: Int) {
+        print("\(x) - \(y)")
         if(fields[x][y].amountOfAtoms == 0) {
             fields[x][y] = Field(owner: Player.red, amountOfAtoms: 1)
         } else if(fields[x][y].amountOfAtoms == 1) {
@@ -51,6 +53,7 @@ class UnstableAtomsGame: UnstableAtoms {
     }
     
     func divideAtoms(x: Int, y: Int) {
+        
         if(x < 5) {
             addAtoms(x: x + 1, y: y)
         }
