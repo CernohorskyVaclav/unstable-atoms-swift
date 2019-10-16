@@ -84,11 +84,11 @@ class UnstableAtomsGame: UnstableAtoms {
         
         var blueies = 0
         var redies = 0
-        for y in 0...5 {
-            for x in 0...8 {
-                if(fields[y][x].owner == Player.red) {
+        for columns in fields {
+            for rows in columns {
+                if(rows.owner == Player.red) {
                     redies += 1
-                } else if(fields[y][x].owner == Player.blue) {
+                } else if(rows.owner == Player.blue) {
                     blueies += 1
                 }
             }
