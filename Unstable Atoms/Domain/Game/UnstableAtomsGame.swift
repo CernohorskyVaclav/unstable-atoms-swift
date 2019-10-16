@@ -20,7 +20,7 @@ class UnstableAtomsGame: UnstableAtoms {
     
     private (set) var columns: Int
     
-    private var blueTurn: Bool = true
+    private(set) var gameOver: Bool = false
     
     init(rows: Int, columns: Int) {
         fields = Array(repeating: Array(repeating: Field(owner: .none, amountOfAtoms: 0), count: rows), count: columns)
@@ -30,45 +30,45 @@ class UnstableAtomsGame: UnstableAtoms {
     
     // TODO: Implement
     func makeMove(coordinate: Coordinate) {
+        if(gameOver == true) {
+            return
+        }
+        
         var player: Player
-        if(blueTurn) {
+        if(playerOnMove == .blue) {
             player = Player.blue
-            blueTurn = false
+            playerOnMove = .red
         } else {
             player = Player.red
-            blueTurn = true
+            playerOnMove = .blue
         }
-        addAtoms(x: coordinate.x, y: coordinate.y, player: player)
-        print("-----")
+        if(fields[coordinate.x][coordinate.y].owner == player || fields[coordinate.x][coordinate.y].owner == Player.none) {
+            addAtoms(x: coordinate.x, y: coordinate.y, player: player)
+            //print("-----")
+        } else {
+            if(playerOnMove == .blue) {
+                player = Player.red
+                playerOnMove = .red
+            } else {
+                player = Player.blue
+                playerOnMove = .blue
+            }
+        }
     }
     
     func addAtoms(x: Int, y: Int, player: Player) {
-        if(fields[x][y].owner == Player.blue && blueTurn == false) {
-            print("jednicka")
-        } else if(fields[x][y].owner == Player.red && blueTurn == true) {
-            print("dvojka")
-        }
-        print("\(x) - \(y)")
-        if(fields[x][y].amountOfAtoms == 0) {
-            fields[x][y] = Field(owner: player, amountOfAtoms: 1)
-        } else if(fields[x][y].amountOfAtoms == 1) {
-            fields[x][y] = Field(owner: player, amountOfAtoms: 2)
-        } else if(fields[x][y].amountOfAtoms == 2) {
-            fields[x][y] = Field(owner: player, amountOfAtoms: 3)
-        } else if(fields[x][y].amountOfAtoms == 3) {
-            //if(x < 5 && x > 0 && y < 8 && y > 0) {
+        var value = fields[x][y].amountOfAtoms
+        //print("\(x) - \(y)")
+        if(value == 3) {
             fields[x][y] = Field(owner: Player.none, amountOfAtoms: 0)
-                divideAtoms(x: x, y: y, player: player)
-            //} else {
-            //    print("Outofrange")
-            //}
+            divideAtoms(x: x, y: y, player: player)
         } else {
-            print("error")
+            value += 1
+            fields[x][y] = Field(owner: player, amountOfAtoms: value)
         }
     }
     
     func divideAtoms(x: Int, y: Int, player: Player) {
-        
         if(x < 5) {
             addAtoms(x: x + 1, y: y, player: player)
         }
@@ -80,6 +80,29 @@ class UnstableAtomsGame: UnstableAtoms {
         }
         if(y > 0) {
             addAtoms(x: x, y: y - 1, player: player)
+        }
+        
+        var blueies = 0
+        var redies = 0
+        for y in 0...5 {
+            for x in 0...8 {
+                if(fields[y][x].owner == Player.red) {
+                    redies += 1
+                } else if(fields[y][x].owner == Player.blue) {
+                    blueies += 1
+                }
+            }
+        }
+        if(redies == 0) {
+            winner = .blue
+            gameOver = true
+            playerOnMove = .none
+            //print("end")
+        } else if(blueies == 0) {
+            winner = .red
+            gameOver = true
+            playerOnMove = .none
+            //print("end")
         }
     }
 }
